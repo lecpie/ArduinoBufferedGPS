@@ -12,15 +12,17 @@
 #define    LONGITUDETOKEN      4
 #define    LONGITUDESIGNTOKEN  5
 
+#define DEFINEPATH BufferedGPS
 
-MinimalGPS::MinimalGPS(int rx, int tx, long refreshrate)
+
+DEFINEPATH::BufferedGPS(int rx, int tx, long refreshrate)
     : _ss(rx,tx),
       _refreshrate(refreshrate),
       _lastrefresh          (0),
       _last_latitude      (0.0),
       _last_longitude     (0.0) {}
 
-void MinimalGPS::begin(long baud)
+void DEFINEPATH::begin(long baud)
 {
     _ss.begin(baud);
 
@@ -33,13 +35,13 @@ void MinimalGPS::begin(long baud)
     forcerefresh();
 }
 
-float MinimalGPS::getLatitude()
+float DEFINEPATH::getLatitude()
 {
     refresh();
     return _last_latitude;
 }
 
-float MinimalGPS::getLongitude()
+float DEFINEPATH::getLongitude()
 {
     refresh();
     return _last_longitude;
@@ -69,7 +71,7 @@ static float parseNMEA(const char * term)
     return ret + ((5 * tenMillionthsOfMinutes + 1) / 3) / 1000000000.0;
 }
 
-void MinimalGPS::forcerefresh()
+void DEFINEPATH::forcerefresh()
 {
     uint8_t itok         = 0,
             goodsentence = 0,
@@ -164,17 +166,18 @@ void MinimalGPS::forcerefresh()
     _lastrefresh = millis();
 }
 
-void MinimalGPS::refresh()
+void DEFINEPATH::refresh()
 {
     if (millis() - _lastrefresh < _refreshrate) return;
 
     forcerefresh();
 }
 
-#undef    TYPETOKEN
-#undef    LATITUDETOKEN
-#undef    LATITUDESIGNTOKEN
-#undef    LONGITUDETOKEN
-#undef    LONGITUDESIGNTOKEN
-#undef    SELECTTYPE
-#undef    GPSBUFSIZE
+#undef DEFINEPATH
+#undef TYPETOKEN
+#undef LATITUDETOKEN
+#undef LATITUDESIGNTOKEN
+#undef LONGITUDETOKEN
+#undef LONGITUDESIGNTOKEN
+#undef SELECTTYPE
+#undef GPSBUFSIZE

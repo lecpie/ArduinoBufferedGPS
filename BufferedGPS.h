@@ -45,7 +45,7 @@ typedef struct mockss {
 
 #define GPSBUFSIZE 16
 
-class MinimalGPS {
+class BufferedGPS {
 private:
     SoftwareSerial _ss;
     uint32_t _refreshrate;
@@ -61,7 +61,7 @@ private:
     void forcerefresh();
 
 public:
-    MinimalGPS (int rx, int tx, long refreshrate);
+    BufferedGPS (int rx, int tx, long refreshrate);
 
     float getLatitude();
     float getLongitude();

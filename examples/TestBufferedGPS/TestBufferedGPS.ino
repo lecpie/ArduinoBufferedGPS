@@ -7,7 +7,7 @@
 #define TX         1
 #define GPSBAUD 4800
 
-MinimalGPS gps(RX, TX, 50);
+BufferedGPS gps(RX, TX, 50);
 
 void setup()
 {
