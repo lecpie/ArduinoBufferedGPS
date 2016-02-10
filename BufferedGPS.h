@@ -58,12 +58,15 @@ private:
     uint8_t _igpsbuf;
 
     void refresh();
+    void forcerefresh();
 
 public:
-    MinimalGPS (int rx, int tx, long baud, long refreshrate);
+    MinimalGPS (int rx, int tx, long refreshrate);
 
     float getLatitude();
     float getLongitude();
+
+    void begin(long baud);
 };
 
 #undef GPSBUFSIZE
